@@ -8,6 +8,7 @@ from fat_finger import fat_finger
 from telex import telex_error
 from region import region_error
 from edit_distance import edit_distance_error
+from no_diacritics import no_diacritic
 
 ErrorType = str  
 
@@ -18,6 +19,7 @@ ALL_ERROR_TYPES: list[ErrorType] = [
     "telex",
     "region",
     "edit_distance",
+    "no_diacritic",
 ]
 
 
@@ -36,6 +38,7 @@ def generate_error(
         "telex": telex_error,
         "region": region_error,
         "edit_distance": edit_distance_error,
+        "no_diacritic": no_diacritic,
     }
 
     if error_type not in dispatch:
