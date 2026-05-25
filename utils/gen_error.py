@@ -1,4 +1,5 @@
 import random
+import re
 from typing import Callable
 
 
@@ -19,8 +20,45 @@ ALL_ERROR_TYPES: list[ErrorType] = [
     "telex",
     "region",
     "edit_distance",
-    "no_diacritic",
+    "no_diacritics_abbreviation",
+    "no_diacritics_region",
 ]
+
+
+def no_diacritics_abbreviation(text: str) -> str:
+    return abbreviate(no_diacritic(text))
+
+
+def no_diacritics_region(text: str) -> str:
+    return region_error(no_diacritic(text), dialect="random")
+
+
+def _apply_tokenwise(
+    text: str, fn: Callable[[str], str], token_rate: float, rng: random.Random
+) -> str:
+    parts = re.split(r"(\s+)", text)
+    for idx, token in enumerate(parts):
+        if token.isspace() or not token:
+            continue
+        if rng.random() < token_rate:
+            parts[idx] = fn(token)
+    return "".join(parts)
+
+
+def _random_kwargs(error_type: ErrorType, rng: random.Random, **kwargs) -> dict:
+    params: dict = {}
+    if error_type == "teencode":
+        params["intensity"] = kwargs.get("intensity", rng.uniform(0.35, 0.75))
+    elif error_type == "fat_finger":
+        params["error_rate"] = kwargs.get("error_rate", rng.uniform(0.06, 0.2))
+    elif error_type == "telex":
+        params["mode"] = kwargs.get("mode", "random")
+        params["token_rate"] = kwargs.get("token_rate", rng.uniform(0.2, 0.5))
+    elif error_type == "region":
+        params["dialect"] = kwargs.get("dialect", "random")
+    elif error_type == "edit_distance":
+        params["num_edits"] = kwargs.get("num_edits", rng.choice([1, 1, 2]))
+    return params
 
 
 def generate_error(
@@ -28,6 +66,7 @@ def generate_error(
     error_type: ErrorType | None = None,
     **kwargs,
 ) -> tuple[str, ErrorType]:
+    rng = random.Random(kwargs.pop("seed", None))
     if error_type is None:
         error_type = random.choice(ALL_ERROR_TYPES)
 
@@ -39,13 +78,21 @@ def generate_error(
         "region": region_error,
         "edit_distance": edit_distance_error,
         "no_diacritic": no_diacritic,
+        "no_diacritics_abbreviation": no_diacritics_abbreviation,
+        "no_diacritics_region": no_diacritics_region,
     }
 
     if error_type not in dispatch:
         raise ValueError(f"Unknown error_type '{error_type}'. Choose from {ALL_ERROR_TYPES}")
 
     fn = dispatch[error_type]
-    noisy = fn(text, **kwargs)
+    params = _random_kwargs(error_type, rng, **kwargs)
+
+    if error_type == "telex":
+        token_rate = params.pop("token_rate")
+        noisy = _apply_tokenwise(text, lambda t: fn(t, **params), token_rate, rng)
+    else:
+        noisy = fn(text, **params)
     return noisy, error_type
 
 
