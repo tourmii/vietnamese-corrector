@@ -1,0 +1,59 @@
+sample_id,variant_id,clean_text,noisy_text,error_types
+0,0,'Trâu điên' tấn công người ở Quảng Trị: Có cần thiết phải giết mấy con trâu?.,'Trâu điên' tấn cog người ở Quảng Trị: Có cần thiết phải giết mấy con trâu?.,abbreviation
+0,1,'Trâu điên' tấn công người ở Quảng Trị: Có cần thiết phải giết mấy con trâu?.,'Trâ uđiên' tấn công người ở Quảng Trị: Có cần thiết phải giết mấy coin trâu?.,edit_distance
+0,2,'Trâu điên' tấn công người ở Quảng Trị: Có cần thiết phải giết mấy con trâu?.,'Trau dien' tan cog nguoi o Quang Tri: Co can thiet phai giet may con trau?.,abbreviation+no_diacritic
+1,0,Đưa Manulife trở thành công ty bảo hiểm được tin cậy nhất.,Dưw Manulige trở thành công ty hảo hiểj được tkn cậy bhấh.,fat_finger
+1,1,Đưa Manulife trở thành công ty bảo hiểm được tin cậy nhất.,Dư4 M4nulif3 trở th4`nh cong ty b4?o hi3?m dược tin cậy nhất.,teencode
+1,2,Đưa Manulife trở thành công ty bảo hiểm được tin cậy nhất.,Dua Manulife tro thanh cog ty bao hiem dc tin cay nhat.,abbreviation+no_diacritic
+2,0,Đức: Giải cứu cậu bé trong két sắt vì chơi trò trốn tìm.,Duc: Giai cuu cau be trong ket sat vi choi tro tron tim.,no_diacritic
+2,1,Đức: Giải cứu cậu bé trong két sắt vì chơi trò trốn tìm.,Đức: Giải cứu cậu bé trong két sắt vì trơi trò trốn tìm.,region
+2,2,Đức: Giải cứu cậu bé trong két sắt vì chơi trò trốn tìm.,Duc: G cuu cau be trong ket sat vi choi tro tron tim.,abbreviation+no_diacritic
+3,0,Sau này cắt lễ đã giảm nhiều.,Sau nay căt lê đa giam nhiêu.,telex
+3,1,Sau này cắt lễ đã giảm nhiều.,Sau nay cat le da giam nhieu.,no_diacritic
+3,2,Sau này cắt lễ đã giảm nhiều.,Zaj nàh vắt lễ đã guảm bhuều.,fat_finger
+3,3,Sau này cắt lễ đã giảm nhiều.,Sau nay cat le da gm nhieu.,abbreviation+no_diacritic
+4,0,XSMN 18/7.,XSML 18/7.,region
+4,1,XSMN 18/7.,XSM N1/87.,edit_distance
+4,2,XSMN 18/7.,XSM 18/7.,abbreviation+no_diacritic
+5,0,Serena Williams lần thứ 2 đăng quang Pháp mở rộng.,Serena Williams laafn thuws 2 ddawng quang Phasp mowr roojng.,telex
+5,1,Serena Williams lần thứ 2 đăng quang Pháp mở rộng.,S3r3na W1ll1ams lần thứ 2 dang quang Pha'p mở rộng.,teencode
+5,2,Serena Williams lần thứ 2 đăng quang Pháp mở rộng.,Srn Williams lan thu 2 dang quang Phap mo rong.,abbreviation+no_diacritic
+6,0,Brad Pitt bênh vợ trước thông tin phản đối Angelina cắt bỏ ngực.,Brad Pit bênh vợ trước êthông tin phản đối Angelina cắt bỏ ngực.,edit_distance
+6,1,Brad Pitt bênh vợ trước thông tin phản đối Angelina cắt bỏ ngực.,Brqd Putt bemn vợ trướf tyôjg tln pgản đối Angepinw cắt vỏ bgựd.,fat_finger
+6,2,Brad Pitt bênh vợ trước thông tin phản đối Angelina cắt bỏ ngực.,Brad Pitt benh vk truoc thog tin phan doi Angelina cat bo nguc.,abbreviation+no_diacritic
+7,0,Vy Oanh bất ngờ lên tiếng sau thông tin đã sinh con tại Mỹ.,Vy Oa bất ngờ lên tiếng sau thog tin đã sinh con tại Mỹ.,abbreviation
+7,1,Vy Oanh bất ngờ lên tiếng sau thông tin đã sinh con tại Mỹ.,Dy Oangh bất nggờ lêng tiếngg sau thôngg ting đạ singh tong tại Mỹ.,region
+7,2,Vy Oanh bất ngờ lên tiếng sau thông tin đã sinh con tại Mỹ.,Vy Oanh bat ngo len tieng sau thong tin da sinh con tai My.,no_diacritic
+7,3,Vy Oanh bất ngờ lên tiếng sau thông tin đã sinh con tại Mỹ.,Vy Oa bat ngo len tieng sau thog tin da sinh con tai My.,abbreviation+no_diacritic
+8,0,Thừa Thiên Huế phấn đấu 100% trẻ dưới 6 tuổi được cấp thẻ BHYT.,Thừa Th13n Hu3' fấn dấu 100% trẻ duớ1 6 tuổ1 duợc cấp thẻ BHYT.,teencode
+8,1,Thừa Thiên Huế phấn đấu 100% trẻ dưới 6 tuổi được cấp thẻ BHYT.,Thưa Thiên Huê phân đâu 100% tre dươi 6 tuôi đươc câp the BHYT.,telex
+8,2,Thừa Thiên Huế phấn đấu 100% trẻ dưới 6 tuổi được cấp thẻ BHYT.,Thừa Thiên Hế phấn đấu 1ắ0% trẻ dưới 6 tuổi được cấp thẻ BHYT.,edit_distance
+8,3,Thừa Thiên Huế phấn đấu 100% trẻ dưới 6 tuổi được cấp thẻ BHYT.,Thua Thien Hue phan dau 100% tre duoi 6 tuoi dc cap the BHYT.,abbreviation+no_diacritic
+9,0,"Theo Hoàn cầu, Chủ tịch Trung Quốc Tập Cận Bình từng tuyên bố, chỉ những người có khả năng chiến đấu mới có thể ngăn chặn một cuộc chiến và chỉ những người luôn chuẩn bị cho chiến tranh mới có thể ngăn chặn chiến tranh.","Theo Hoàn cầu, Chủ tịch Trung Quốc Tập Cận Bình từng tuyên bố, chỉ những người có khả năng chiến đấu mới có thể ngăn chặn một cuộc chiến và chỉ những người lun chuẩn bị cho chiến tra mới có thể ngăn chặn chiến tra.",abbreviation
+9,1,"Theo Hoàn cầu, Chủ tịch Trung Quốc Tập Cận Bình từng tuyên bố, chỉ những người có khả năng chiến đấu mới có thể ngăn chặn một cuộc chiến và chỉ những người luôn chuẩn bị cho chiến tranh mới có thể ngăn chặn chiến tranh.","Thek Hoàn cầu, Chủ tịdh Rfung Quốc Tập Cận Bìny từng tuyên bố, chỉ nuững mgười có khả năjg chiến đấu mới có thể ngân chặn mộh cyộc cgiến và chỉ nuữjg nguời lkôn chuẩn bị cho chiến tramj mới có thể ntăn chặn dhiến tranh.",fat_finger
+9,2,"Theo Hoàn cầu, Chủ tịch Trung Quốc Tập Cận Bình từng tuyên bố, chỉ những người có khả năng chiến đấu mới có thể ngăn chặn một cuộc chiến và chỉ những người luôn chuẩn bị cho chiến tranh mới có thể ngăn chặn chiến tranh.","Theo Hoàng cầu, Củ tịc Trungg Quốc Tập Cậng Bìngh từngg tuyeng bố, cỉ nghựngg nggười có khả ngăngg ciếng đấu mới có thể nggăng cặng một cuộc ciếng và cỉ nghựngg nggười luông cuẩng bị co ciếng trangh mới có thể nggăng cặng ciếng trangh.",region
+9,3,"Theo Hoàn cầu, Chủ tịch Trung Quốc Tập Cận Bình từng tuyên bố, chỉ những người có khả năng chiến đấu mới có thể ngăn chặn một cuộc chiến và chỉ những người luôn chuẩn bị cho chiến tranh mới có thể ngăn chặn chiến tranh.","Theo Hoan cau, Chu tich Trung Quoc Tap Can Binh tung tuyen bo, chi nhung nguoi co kha nang chien dau moi co the ngan chan mot cuoc chien va chi nhung nguoi lun chuan bi cho chien tra moi co the ngan chan chien tra.",abbreviation+no_diacritic
+10,0,"Chú trọng công tác xây dựng, chỉnh đốn Đảng và hệ thống chính trị trong sạch, vững mạnh; nâng cao năng lực lãnh đạo, sức chiến đấu của các tổ chức Đảng và đảng viên.","Chus trọng coong tasc xaay duwjng, chirnh ddoosn DDarng vaf heej thoosng chisnh trij trong sajch, vuwxng majnh; naang cao nawng luwjc laxnh ddajo, suwsc chieesn ddaasu cura casc toor chuwsc DDarng vaf ddarng vieen.",telex
+10,1,"Chú trọng công tác xây dựng, chỉnh đốn Đảng và hệ thống chính trị trong sạch, vững mạnh; nâng cao năng lực lãnh đạo, sức chiến đấu của các tổ chức Đảng và đảng viên.","Chu' tr0.ng c0ng t4'c xây dựng, ch1?nh dốn D4?ng v4` h3. thống ch1'nh trị tr0ng s4.ch, vững m4.nh; nâng c40 n4ng lực l4~nh d4.0, sức ch13'n dấu cu?4 c4'c tổ chức D4?ng v4` d4?ng v13n.",teencode
+10,2,"Chú trọng công tác xây dựng, chỉnh đốn Đảng và hệ thống chính trị trong sạch, vững mạnh; nâng cao năng lực lãnh đạo, sức chiến đấu của các tổ chức Đảng và đảng viên.","Chu trong cong tac xay dung, chinh don Dang va he thong chinh tri trong sach, vung manh; nang cao nang luc lanh dao, suc chien dau cua cac to chuc Dang va dang vien.",no_diacritic
+10,3,"Chú trọng công tác xây dựng, chỉnh đốn Đảng và hệ thống chính trị trong sạch, vững mạnh; nâng cao năng lực lãnh đạo, sức chiến đấu của các tổ chức Đảng và đảng viên.","Chu trong cog tac xay dung, chinh don Dang va he thong chinh tri trong sach, vung manh; nang cao nang luc lanh dao, suc chien dau cua cac to chuc Dang va dang vien.",abbreviation+no_diacritic
+11,0,Thương mại hiện đại nhìn từ... nhà vệ sinh.,Thươhg mại hiện đại hhìn từ... nhà vệ sinh.,fat_finger
+11,1,Thương mại hiện đại nhìn từ... nhà vệ sinh.,Thương mại hiện đạ inhìn từ... nhà ệv sinh.,edit_distance
+11,2,Thương mại hiện đại nhìn từ... nhà vệ sinh.,Thng mai hien dai nhin tu... nha ve sinh.,abbreviation+no_diacritic
+12,0,"Thỏa thuận Minsk quá mong manh, dễ đứt?.","Thỏa thuậl Milsk quá molg malh, dễ đứt?.",region
+12,1,"Thỏa thuận Minsk quá mong manh, dễ đứt?.","Th0?4 thuận Minsk qu4' m0ng m4nh, d3~ dứt?.",teencode
+12,2,"Thỏa thuận Minsk quá mong manh, dễ đứt?.","Thoa thuan Minsk qua mong ma, de dut?.",abbreviation+no_diacritic
+13,0,P-500 được trang bị lần đầu tiên cho tuần dương hạm sân bay Kiev năm 1975.,P-500 đươc trang bi lân đâu tiên cho tuân dương ham sân bay Kiev năm 1975.,telex
+13,1,P-500 được trang bị lần đầu tiên cho tuần dương hạm sân bay Kiev năm 1975.,P-500 đc trang bị lần đầu tiên cho tuần dương hạm sân bay Kiev năm 1975.,abbreviation
+13,2,P-500 được trang bị lần đầu tiên cho tuần dương hạm sân bay Kiev năm 1975.,P-500 dc trang bi lan dau tien cho tuan duong ham san bay Kiev nam 1975.,abbreviation+no_diacritic
+14,0,DPM: ĐHCĐ không thông qua việc đầu tư vào Nhà máy Đạm Cà Mau.,DPM: DHCD khong thong qua viec dau tu vao Nha may Dam Ca Mau.,no_diacritic
+14,1,DPM: ĐHCĐ không thông qua việc đầu tư vào Nhà máy Đạm Cà Mau.,DPM: ĐHTĐ khôngg thôngg qua việt đầu tư vào NgGhà máy Đạm Tà Mau.,region
+14,2,DPM: ĐHCĐ không thông qua việc đầu tư vào Nhà máy Đạm Cà Mau.,DPM: ĐHCĐ không thông qua việc đầu tư vào Nhà ơmáy Đạm àC Mau.,edit_distance
+14,3,DPM: ĐHCĐ không thông qua việc đầu tư vào Nhà máy Đạm Cà Mau.,DPM: DHCD k thog qua viec dau tu vao Nha may Dam Ca Mau.,abbreviation+no_diacritic
+15,0,"Quan chức cao cấp: Như Tổng thống đã nói tối nay, Bin Laden đã bị giết trong một cuộc đấu súng vào lúc mà các đặc nhiệm bước vô tòa nhà.","Quan chuwsc cao caasp: Nhuw Toorng thoosng ddax nói toosi nay, Bin Laden ddax bij gieest trong moojt cuoojc ddaasu susng vafo lusc maf casc ddawjc nhieejm buwowsc voo tòa nhaf.",telex
+15,1,"Quan chức cao cấp: Như Tổng thống đã nói tối nay, Bin Laden đã bị giết trong một cuộc đấu súng vào lúc mà các đặc nhiệm bước vô tòa nhà.","Qu4n chức c40 cấp: Nhu Tổng thống d4~ n0'1 tố1 n4y, B1n L4d3n d4~ bị g13't tr0ng một cuộc dấu su'ng v4`0 lu'c m4` c4'c dặc nh13.m buớc v0 t0`4 nh4`.",teencode
+15,2,"Quan chức cao cấp: Như Tổng thống đã nói tối nay, Bin Laden đã bị giết trong một cuộc đấu súng vào lúc mà các đặc nhiệm bước vô tòa nhà.","Qn chuc cao cap: Nhu Tong thong da noi toi nay, Bin Laden da bi giet trong mot cuoc dau sung vao luc ma cac dac nhiem buoc vo toa nha.",abbreviation+no_diacritic
+16,0,Trao học bổng và vốn vay cho công nhân đi học.,Tfao học bổmg và vốn vzy cup công nhân đj học.,fat_finger
+16,1,Trao học bổng và vốn vay cho công nhân đi học.,Trao học bổlg và vốl vay tro côlg lhâl đi học.,region
+16,2,Trao học bổng và vốn vay cho công nhân đi học.,Trao học ybổng và vốn vay cho công hnân đi học.,edit_distance
+16,3,Trao học bổng và vốn vay cho công nhân đi học.,Trao hoc bong va von vay cho cog nhan di hoc.,abbreviation+no_diacritic

@@ -1,6 +1,9 @@
 import random
 
-from tone_utils import VOWEL_TONES
+try:
+    from .tone_utils import VOWEL_TONES
+except ImportError:
+    from tone_utils import VOWEL_TONES
 
 TELEX_RAW: dict[str, str] = {
     "à": "af", "ả": "ar", "ã": "ax", "á": "as", "ạ": "aj",
