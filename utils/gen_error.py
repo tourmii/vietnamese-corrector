@@ -60,7 +60,7 @@ if __name__ == "__main__":
         "Xin chào mọi người",
         "Điện thoại của tôi bị hỏng",
         "Trường học rất đẹp",
-        "Tôi không biết",
+        "ừ nó cười kiểu mỉa mai",
     ]
 
     for text in samples:
