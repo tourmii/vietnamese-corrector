@@ -140,7 +140,7 @@ class Decoder(nn.Module):
                 mask[token_indices.long()] = 0
 
                 # don't use teacher forcing on aeiouyd tokens
-                self.teacher_forcing_masks[idx] = 0
+                # self.teacher_forcing_masks[idx] = 0
             else:
                 mask[self.vocab.stoi[token]] = 0
 

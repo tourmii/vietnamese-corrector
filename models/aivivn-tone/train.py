@@ -12,6 +12,7 @@ from model import Encoder, Decoder, Seq2SeqConcat
 from cyclic_lr import CyclicLR
 from visualization import Visualization
 from huggingface_hub import login
+import wandb
 
 login(token="")
 
@@ -56,7 +57,7 @@ class Trainer:
 
         # prepare optimizer and scheduler
         self.optimizer = Adam(self.model.parameters())
-        self.scheduler = CyclicLR(self.optimizer, base_lr=0.00001, max_lr=0.00005,
+        self.scheduler = CyclicLR(self.optimizer, base_lr=0.0001, max_lr=0.001,
                                   step_size_up=4000, step_size_down=4000,
                                   mode="triangular", gamma=1.0, cycle_momentum=False)
 
@@ -67,8 +68,10 @@ class Trainer:
         self.global_acc = []
 
         # visualization
-        self.vis_loss = Visualization(env_name="aivivn_tone", xlabel="step", ylabel="loss", title="loss (mean per 300 steps)")
-        self.vis_acc = Visualization(env_name="aivivn_tone", xlabel="step", ylabel="acc", title="training accuracy (mean per 300 steps)")
+        # self.vis_loss = Visualization(env_name="aivivn_tone", xlabel="step", ylabel="loss", title="loss (mean per 300 steps)")
+        # self.vis_acc = Visualization(env_name="aivivn_tone", xlabel="step", ylabel="acc", title="training accuracy (mean per 300 steps)")
+        wandb.login(key='')
+        wandb.init(project="vietnamese-corrector", name="aivivn_tone", reinit=True)
 
     def train(self, train_iterator, val_iterator, start_epoch=0, print_every=100):
         for epoch in range(start_epoch, self.n_epochs):
@@ -192,8 +195,9 @@ class Trainer:
 
                 # visualize
                 if self.global_iter == 1:
-                    self.vis_loss.plot_line(self.global_loss[0], 1)
-                    self.vis_acc.plot_line(self.global_acc[0]/total_numel, 1)
+                    # self.vis_loss.plot_line(self.global_loss[0], 1)
+                    # self.vis_acc.plot_line(self.global_acc[0]/total_numel, 1)
+                    wandb.log({"train/loss": self.global_loss[0], "train/acc": self.global_acc[0]/total_numel}, step=1)
 
                 # update graph every 10 iterations
                 if self.global_iter % 10 == 0:
@@ -202,8 +206,9 @@ class Trainer:
                     moving_avg_acc = sum(self.global_acc[max(0, len(self.global_acc) - 300):]) / sum(self.global_numel[max(0, len(self.global_numel) - 300):])
 
                     # visualize
-                    self.vis_loss.plot_line(moving_avg_loss, self.global_iter)
-                    self.vis_acc.plot_line(moving_avg_acc, self.global_iter)
+                    # self.vis_loss.plot_line(moving_avg_loss, self.global_iter)
+                    # self.vis_acc.plot_line(moving_avg_acc, self.global_iter)
+                    wandb.log({"train/moving_avg_loss": moving_avg_loss, "train/moving_avg_acc": moving_avg_acc, "train/loss_step": loss.item()}, step=self.global_iter)
 
             # print
             if i % print_every == 0:
@@ -217,9 +222,13 @@ class Trainer:
 
         # summarize for each epoch
         template = "EPOCH = {}  AVG_LOSS = {:5.3f}  AVG_CORRECT = {:6.3f}\n"
-        print(template.format(epoch,
-                              total_loss / total_iter,
-                              total_correct / total_numel * 100.0))
+        avg_loss = total_loss / total_iter
+        avg_correct = total_correct / total_numel
+        print(template.format(epoch, avg_loss, avg_correct * 100.0))
+        if train:
+            wandb.log({"epoch/train_loss": avg_loss, "epoch/train_acc": avg_correct}, step=self.global_iter)
+        else:
+            wandb.log({"epoch/val_loss": avg_loss, "epoch/val_acc": avg_correct}, step=self.global_iter)
 
     def save(self, epoch, save_path="checkpoint"):
         torch.save({
@@ -372,18 +381,8 @@ if __name__ == "__main__":
     # set random seeds
     set_seeds(420)
 
-    # load vocab
-    # with open(src_vocab_path, "rb") as f:
-    #     src_vocab = dill.load(f)
-    # with open(tgt_vocab_path, "rb") as f:
-    #     tgt_vocab = dill.load(f)
 
-    # load data
-    # src_vocab, tgt_vocab, train_parts, val, val_iterator, batch_size = load_data_in_parts(train_src, train_tgt, val_src, val_tgt)
-
-    # prepare trainer
-
-    src_vocab, tgt_vocab, train_iterator, val_iterator = load_data_custom_csv(train_dataset, test_dataset, batch_size=64, save_path="checkpoint")
+    src_vocab, tgt_vocab, train_iterator, val_iterator = load_data_custom_csv(train_dataset, test_dataset, batch_size=16, save_path="checkpoint")
     trainer = Trainer(src_vocab, tgt_vocab)
 
     # train
