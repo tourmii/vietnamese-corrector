@@ -9,8 +9,8 @@ from datasets import load_dataset
 from transformers import (
     AutoModelForSeq2SeqLM,
     AutoTokenizer,
-    TrainingArguments,
-    Trainer,
+    Seq2SeqTrainingArguments,
+    Seq2SeqTrainer,
     EarlyStoppingCallback,
 )
 
@@ -24,7 +24,7 @@ class Config:
     model_name: str = "google-t5/t5-base"
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
-    output_dir: str = "./vietnamese-correction-training"
+    output_dir: str = "./t5-correction-finetune"
     num_train_epochs: int = 5
     train_batch_size: int = 16
     eval_batch_size: int = 32
@@ -129,7 +129,7 @@ def main():
     )
     print(f"Train size: {len(tokenized['train'])} | Eval size: {len(tokenized['test'])}")
 
-    training_args = TrainingArguments(
+    training_args = Seq2SeqTrainingArguments(
         output_dir=cfg.output_dir,
         num_train_epochs=cfg.num_train_epochs,
         per_device_train_batch_size=cfg.train_batch_size,
@@ -153,12 +153,12 @@ def main():
         generation_max_length=cfg.max_target_length,
     )
 
-    trainer = Trainer(
+    trainer = Seq2SeqTrainer(
         model=model,
         args=training_args,
         train_dataset=tokenized["train"],
         eval_dataset=tokenized["test"],
-        tokenizer=tokenizer,
+        processing_class=tokenizer,
         compute_metrics=make_compute_metrics_fn(tokenizer),
         callbacks=[EarlyStoppingCallback(early_stopping_patience=2)],
     )
