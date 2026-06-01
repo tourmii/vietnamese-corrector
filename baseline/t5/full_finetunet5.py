@@ -21,13 +21,13 @@ class Config:
     max_input_length: int = 128
     max_target_length: int = 128
 
-    model_name: str = "google-t5/t5-base"
+    model_name: str = "VietAI/vit5-base"
     device: str = "cuda" if torch.cuda.is_available() else "cpu"
 
-    output_dir: str = "./t5-correction-finetune"
+    output_dir: str = "./t5-correction-training"
     num_train_epochs: int = 5
-    train_batch_size: int = 16
-    eval_batch_size: int = 32
+    train_batch_size: int = 64
+    eval_batch_size: int = 64
     learning_rate: float = 1e-4
     weight_decay: float = 0.01
     warmup_ratio: float = 0.05
@@ -35,9 +35,11 @@ class Config:
     bf16: bool = True
 
     logging_steps: int = 100
-    eval_strategy: str = "epoch"
-    save_strategy: str = "epoch"
-    save_total_limit: int = 3
+    eval_strategy: str = "steps"
+    eval_steps: int = 20000
+    save_strategy: str = "steps"
+    save_steps: int = 20000
+    save_total_limit: int = 5
     load_best_model_at_end: bool = True
     metric_for_best_model: str = "eval_rouge1"
     greater_is_better: bool = True
@@ -89,7 +91,12 @@ def make_compute_metrics_fn(tokenizer):
 
     def compute_metrics(eval_preds):
         preds, labels = eval_preds
+
+        preds = np.where(preds != -100, preds, tokenizer.pad_token_id)
+        preds = np.clip(preds, 0, tokenizer.vocab_size - 1)
+
         labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
+        labels = np.clip(labels, 0, tokenizer.vocab_size - 1)
 
         decoded_preds = [p.strip() for p in tokenizer.batch_decode(preds, skip_special_tokens=True)]
         decoded_labels = [l.strip() for l in tokenizer.batch_decode(labels, skip_special_tokens=True)]
@@ -114,7 +121,7 @@ def main():
     wandb.init(project=cfg.wandb_project, name=cfg.wandb_run_name)
 
     dtype = torch.bfloat16 if cfg.bf16 else (torch.float16 if cfg.fp16 else torch.float32)
-    tokenizer = AutoTokenizer.from_pretrained(cfg.model_name)
+    tokenizer = AutoTokenizer.from_pretrained(cfg.model_name, use_fast=False, legacy=True)
     model = AutoModelForSeq2SeqLM.from_pretrained(cfg.model_name, torch_dtype=dtype).to(cfg.device)
 
     print(f"Model loaded: {cfg.model_name} | dtype={dtype} | device={cfg.device}")
@@ -140,7 +147,9 @@ def main():
         fp16=cfg.fp16,
         bf16=cfg.bf16,
         eval_strategy=cfg.eval_strategy,
+        eval_steps=cfg.eval_steps,
         save_strategy=cfg.save_strategy,
+        save_steps=cfg.save_steps,
         save_total_limit=cfg.save_total_limit,
         load_best_model_at_end=cfg.load_best_model_at_end,
         metric_for_best_model=cfg.metric_for_best_model,
@@ -158,7 +167,7 @@ def main():
         args=training_args,
         train_dataset=tokenized["train"],
         eval_dataset=tokenized["test"],
-        processing_class=tokenizer,
+        tokenizer=tokenizer,
         compute_metrics=make_compute_metrics_fn(tokenizer),
         callbacks=[EarlyStoppingCallback(early_stopping_patience=2)],
     )

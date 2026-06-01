@@ -2,4 +2,4 @@ __pycache__*
 
 old_news_vn_1.csv
 wandb/
-t5-correction-finetune/
+t5-correction-training/
