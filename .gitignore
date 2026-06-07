@@ -3,3 +3,8 @@ __pycache__*
 old_news_vn_1.csv
 wandb/
 t5-correction-training/
+baseline/~$baseline_model_slides.pptx
+baseline/.DS_Store
+.DS_Store
+baseline/baseline_model_slides.pptx
+baseline/baseline_model_slides.md
