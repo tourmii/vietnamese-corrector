@@ -3,6 +3,9 @@ __pycache__*
 old_news_vn_1.csv
 wandb/
 t5-correction-training/
+
+checkpoints/
+checkpoints-bert/
 baseline/~$baseline_model_slides.pptx
 baseline/.DS_Store
 .DS_Store
