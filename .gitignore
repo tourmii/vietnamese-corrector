@@ -6,3 +6,8 @@ t5-correction-training/
 
 checkpoints/
 checkpoints-bert/
+baseline/~$baseline_model_slides.pptx
+baseline/.DS_Store
+.DS_Store
+baseline/baseline_model_slides.pptx
+baseline/baseline_model_slides.md
