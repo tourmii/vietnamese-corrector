@@ -258,7 +258,7 @@ def main() -> None:
     queue_app(app).launch(
         server_name=args.server_name,
         server_port=args.server_port,
-        share=args.share,
+        share=True,
     )
 
 
