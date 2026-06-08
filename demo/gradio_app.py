@@ -562,7 +562,7 @@ def main() -> None:
     app.launch(
         server_name=_args.server_name,
         server_port=_args.server_port,
-        share=_args.share,
+        share=True
     )
 
 
